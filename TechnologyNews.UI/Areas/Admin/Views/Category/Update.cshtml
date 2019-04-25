@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage.cshtml";
+}
+
+@model TechnologyNews.UI.Areas.Admin.Models.DTO.CategoryDTO
+
+<section class="content-header">
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Home/Index"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="/Admin/Category/Add">Add Category</a></li>
+        <li><a href="/Admin/Category/List">Category List</a></li>
+        <li class="active">Category List</li>
+    </ol>
+</section>
+<br />
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Update Categories</h3>
+                </div>
+                <form action="/Admin/Category/Update" method="post" enctype="multipart/form-data" role="form">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="text">Category Name</label>
+                            <input type="text" name="Name" value="@Model.Name" class="form-control" placeholder="Category Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="text">Description</label>
+                            <input type="text" name="Description" value="@Model.Description" class="form-control" placeholder="Description">
+                        </div>
+                        <input type="text" style="visibility:hidden" name="ID" value="@Model.ID" />
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

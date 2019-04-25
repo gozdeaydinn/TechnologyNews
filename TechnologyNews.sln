@@ -5,6 +5,18 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyNews.UI", "TechnologyNews.UI\TechnologyNews.UI.csproj", "{C7F1DA58-D143-4749-A40C-96BB22915FDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyNews.Core", "TechnologyNews.Core\TechnologyNews.Core.csproj", "{3F20007D-7306-45EB-98DD-3AF11FC1B8B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyNews.Model", "TechnologyNews.Model\TechnologyNews.Model.csproj", "{7328DC5D-B005-4084-9F1F-C5F20A7D736F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyNews.Map", "TechnologyNews.Map\TechnologyNews.Map.csproj", "{E14C0334-2D3B-4872-B4E5-B9FF6929F02D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyNews.Utility", "TechnologyNews.Utility\TechnologyNews.Utility.csproj", "{63A06A33-5D20-4161-8307-EEB118019F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyNews.DAL", "TechnologyNews.DAL\TechnologyNews.DAL.csproj", "{E227323F-4D57-4606-A2CD-417E627CAEBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyNews.Service", "TechnologyNews.Service\TechnologyNews.Service.csproj", "{B5CD33C8-BF64-42DE-AB82-CD1D28EFDF02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +27,30 @@ Global
 		{C7F1DA58-D143-4749-A40C-96BB22915FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7F1DA58-D143-4749-A40C-96BB22915FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7F1DA58-D143-4749-A40C-96BB22915FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F20007D-7306-45EB-98DD-3AF11FC1B8B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F20007D-7306-45EB-98DD-3AF11FC1B8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F20007D-7306-45EB-98DD-3AF11FC1B8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F20007D-7306-45EB-98DD-3AF11FC1B8B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7328DC5D-B005-4084-9F1F-C5F20A7D736F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7328DC5D-B005-4084-9F1F-C5F20A7D736F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7328DC5D-B005-4084-9F1F-C5F20A7D736F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7328DC5D-B005-4084-9F1F-C5F20A7D736F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14C0334-2D3B-4872-B4E5-B9FF6929F02D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14C0334-2D3B-4872-B4E5-B9FF6929F02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14C0334-2D3B-4872-B4E5-B9FF6929F02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14C0334-2D3B-4872-B4E5-B9FF6929F02D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63A06A33-5D20-4161-8307-EEB118019F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A06A33-5D20-4161-8307-EEB118019F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63A06A33-5D20-4161-8307-EEB118019F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63A06A33-5D20-4161-8307-EEB118019F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E227323F-4D57-4606-A2CD-417E627CAEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E227323F-4D57-4606-A2CD-417E627CAEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E227323F-4D57-4606-A2CD-417E627CAEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E227323F-4D57-4606-A2CD-417E627CAEBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5CD33C8-BF64-42DE-AB82-CD1D28EFDF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CD33C8-BF64-42DE-AB82-CD1D28EFDF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CD33C8-BF64-42DE-AB82-CD1D28EFDF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CD33C8-BF64-42DE-AB82-CD1D28EFDF02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

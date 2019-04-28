@@ -19,5 +19,8 @@ namespace TechnologyNews.UI.Areas.Admin.Models.DTO
         public Role Role { get; set; }
         public Gender Gender { get; set; }
         public string ImagePath { get; set; }
+        public string UserImage { get; set; }
+        public string XSmallUserImage { get; set; }
+        public string CruptedUserImage { get; set; }
     }
 }

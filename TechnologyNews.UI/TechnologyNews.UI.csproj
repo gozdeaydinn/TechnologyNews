@@ -106,7 +106,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\ionicons.svg" />
-    <Content Include="Content\image\userlogo.jpg" />
+    <Content Include="Content\Image\userlogo.jpg" />
     <Content Include="Content\script\adminlte.min.js" />
     <Content Include="Content\script\bootstrap.min.js" />
     <Content Include="Content\script\dataTables.bootstrap.min.js" />
@@ -125,14 +125,22 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AppUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\Admin\Models\DTO\AppUserDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\ArticleDTO.cs" />
     <Compile Include="Areas\Admin\Models\DTO\CategoryDTO.cs" />
+    <Compile Include="Areas\Admin\Models\DTO\SubCategoryDTO.cs" />
+    <Compile Include="Areas\Admin\Models\VM\AddArticleVM.cs" />
+    <Compile Include="Areas\Admin\Models\VM\SubCategoryVM.cs" />
+    <Compile Include="Areas\Admin\Models\VM\UpdateArticleVM.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\VM\LoginVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +167,13 @@
     <Content Include="Areas\Admin\Views\AppUser\Update.cshtml" />
     <Content Include="Areas\Admin\Views\SubCategory\Add.cshtml" />
     <Content Include="Areas\Admin\Views\SubCategory\List.cshtml" />
+    <Content Include="Areas\Admin\Views\SubCategory\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Article\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Article\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Article\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,11 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\VM\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Areas\Admin\Views\Home\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechnologyNews.Core\TechnologyNews.Core.csproj">

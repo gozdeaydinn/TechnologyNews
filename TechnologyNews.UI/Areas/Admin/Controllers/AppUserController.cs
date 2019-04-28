@@ -63,13 +63,48 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             model.Gender = appuser.Gender;
             model.Address = appuser.Address;
             model.PhoneNumber = appuser.PhoneNumber;
-            model.ImagePath = appuser.ImagePath;
+            model.UserImage = appuser.UserImage;
+            model.XSmallUserImage = appuser.XSmallUserImage;
+            model.CruptedUserImage = appuser.CruptedUserImage;
             return View(model);
 
         }
         [HttpPost]
-        public ActionResult Update(AppUserDTO data)
+        public ActionResult Update(AppUserDTO data, HttpPostedFileBase Image)
         {
+            List<string> UploadedImagePaths = new List<string>();
+
+            UploadedImagePaths = ImageUploader.UploadSingleImage(ImageUploader.OriginalProfileImagePath, Image, 1);
+
+            data.UserImage = UploadedImagePaths[0];
+
+
+            AppUser update = _appUserService.GetById(data.ID);
+
+            if (data.UserImage == "0" || data.UserImage == "1" || data.UserImage == "2")
+            {
+
+                if (update.UserImage == null || update.UserImage == ImageUploader.DefaultProfileImagePath)
+                {
+                    update.UserImage = ImageUploader.DefaultProfileImagePath;
+                    update.XSmallUserImage = ImageUploader.DefaultXSmallProfileImage;
+                    update.CruptedUserImage = ImageUploader.DefaulCruptedProfileImage;
+                }
+                else
+                {
+                    update.UserImage = update.UserImage;
+                    update.XSmallUserImage = update.XSmallUserImage;
+                    update.CruptedUserImage = update.CruptedUserImage;
+                }
+
+            }
+            else
+            {
+                update.UserImage = UploadedImagePaths[0];
+                update.XSmallUserImage = UploadedImagePaths[1];
+                update.CruptedUserImage = UploadedImagePaths[2];
+            }
+
             AppUser appuser = _appUserService.GetById(data.ID);
             appuser.FirstName = data.FirstName;
             appuser.LastName = data.LastName;

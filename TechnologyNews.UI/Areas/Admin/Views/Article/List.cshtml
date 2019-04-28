@@ -4,17 +4,18 @@
     Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage.cshtml";
 }
 
+@model List<TechnologyNews.Model.Option.Article>
+
 <script src="~/Content/script/dataTables.bootstrap.min.js"></script>
 <script src="~/Content/script/jquery.dataTables.min.js"></script>
 <link href="~/Content/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 
-@model List<TechnologyNews.Model.Option.SubCategory>
 
 <section class="content-header">
     <ol class="breadcrumb">
         <li><a href="/Admin/Home/Index"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="/Admin/SubCategory/Add">Add SubCategory</a></li>
-        <li class="active">SubCategory List</li>
+        <li><a href="/Admin/Article/Add">Add Article</a></li>
+        <li class="active">Article List</li>
     </ol>
 </section>
 <br />
@@ -24,16 +25,19 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">List of SubCategories</h3>
+                    <h3 class="box-title">List of Articles</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
+                                <th>Header</th>
+                                <th>Content</th>
+                                <th>Publish Date</th>
                                 <th>Category Name</th>
+                                <th>SubCategory Name</th>
+                                <th>User Name</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -43,11 +47,14 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.Description</td>
-                                    <td>@item.Category.Name</td>
-                                    <td><a href="/Admin/SubCategory/Update/@item.ID" type="button" class="btn btn-block btn-warning">Update</a></td>
-                                    <td><a href="/Admin/SubCategory/Delete/@item.ID" type="button" class="btn btn-block btn-danger">Delete</a></td>
+                                    <td>@item.Header</td>
+                                    <td>@item.Content</td>
+                                    <td>@item.PublishDate</td>
+                                    <td>@item.SubCategory.Category.Name</td>
+                                    <td>@item.SubCategory.Name</td>
+                                    <td>@item.AppUser.UserName</td>
+                                    <td><a href="/Admin/Article/Update/@item.ID" type="button" class="btn btn-block btn-warning">Update</a></td>
+                                    <td><a href="/Admin/Article/Delete/@item.ID" type="button" class="btn btn-block btn-danger">Delete</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -71,6 +78,5 @@
         })
     })
 </script>
-
 
 

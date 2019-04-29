@@ -136,10 +136,16 @@
     <Compile Include="Areas\Admin\Models\VM\AddArticleVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\SubCategoryVM.cs" />
     <Compile Include="Areas\Admin\Models\VM\UpdateArticleVM.cs" />
+    <Compile Include="Areas\Author\AuthorAreaRegistration.cs" />
+    <Compile Include="Areas\Author\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\Author\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Author\Models\VM\AddArticleVM.cs" />
+    <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Attributes\LoginControl.cs" />
     <Compile Include="Models\VM\LoginVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -172,6 +178,11 @@
     <Content Include="Areas\Admin\Views\Article\List.cshtml" />
     <Content Include="Areas\Admin\Views\Article\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Author\Views\web.config" />
+    <Content Include="Areas\Author\Views\Shared\AuthorLayoutPage.cshtml" />
+    <Content Include="Areas\Author\Views\Article\Add.cshtml" />
+    <Content Include="Areas\Author\Views\Article\List.cshtml" />
+    <Content Include="Areas\Author\Views\Home\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">

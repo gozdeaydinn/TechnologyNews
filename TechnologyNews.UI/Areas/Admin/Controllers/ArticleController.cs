@@ -39,9 +39,26 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Article data)
+        public ActionResult Add(Article data,HttpPostedFileBase Image)
         {
-         
+            List<string> UploadedImagePaths = new List<string>();
+
+            UploadedImagePaths = ImageUploader.UploadSingleImage(ImageUploader.OriginalProfileImagePath, Image, 1);
+
+            data.ImagePath = UploadedImagePaths[0];
+
+            if (data.ImagePath == "0" || data.ImagePath == "1" || data.ImagePath == "2")
+            {
+                data.ImagePath = ImageUploader.DefaultProfileImagePath;
+                data.ImagePath = ImageUploader.DefaultXSmallProfileImage;
+                data.ImagePath = ImageUploader.DefaulCruptedProfileImage;
+            }
+            else
+            {
+                data.ImagePath = UploadedImagePaths[1];
+                data.ImagePath = UploadedImagePaths[2];
+            }
+
             data.Status = Core.Enum.Status.Active;
             data.PublishDate = DateTime.Now;
             _articleService.Add(data);
@@ -60,6 +77,7 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             model.Article.Header = article.Header;
             model.Article.Content = article.Content;
             model.Article.PublishDate = DateTime.Now;
+            model.Article.ImagePath = article.ImagePath;
             List<Category> categorymodel = _categoryService.GetActive();
             model.Categories = categorymodel;
             List<SubCategory> subcategorymodel = _subCategoryService.GetActive();
@@ -69,8 +87,38 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Update(ArticleDTO data)
+        public ActionResult Update(ArticleDTO data,HttpPostedFileBase Image)
         {
+            List<string> UploadedImagePaths = new List<string>();
+
+            UploadedImagePaths = ImageUploader.UploadSingleImage(ImageUploader.OriginalProfileImagePath, Image, 1);
+
+            data.ImagePath = UploadedImagePaths[0];
+
+            Article update = _articleService.GetById(data.ID);
+
+            if (data.ImagePath == "0" || data.ImagePath == "1" || data.ImagePath == "2")
+            {
+
+                if (update.ImagePath == null || update.ImagePath == ImageUploader.DefaultProfileImagePath)
+                {
+                    update.ImagePath = ImageUploader.DefaultProfileImagePath;
+                    update.ImagePath = ImageUploader.DefaultXSmallProfileImage;
+                    update.ImagePath = ImageUploader.DefaulCruptedProfileImage;
+                }
+                else
+                {
+                    update.ImagePath = update.ImagePath;
+                }
+
+            }
+            else
+            {
+                update.ImagePath = UploadedImagePaths[0];
+                update.ImagePath = UploadedImagePaths[1];
+                update.ImagePath = UploadedImagePaths[2];
+            }
+
             Article article = _articleService.GetById(data.ID);
             article.Header = data.Header;
             article.Content = data.Content;

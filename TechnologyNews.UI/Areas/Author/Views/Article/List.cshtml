@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "List";
-    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage.cshtml";
+    Layout = "~/Areas/Author/Views/Shared/AuthorLayoutPage.cshtml";
 }
 
 @model List<TechnologyNews.Model.Option.Article>
@@ -47,19 +47,19 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>@item.Header</td>
-                                <td>@item.Content</td>
-                                <td>@item.PublishDate</td>
-                                <td>@item.SubCategory.Category.Name</td>
-                                <td>@item.SubCategory.Name</td>
-                                <td>@item.AppUser.UserName</td>
-                                <td>
-                                    <img src="@item.ImagePath" style="display:block" width="75" height="75" />
-                                </td>
-                                <td><a href="/Admin/Article/Update/@item.ID" type="button" class="btn btn-block btn-warning">Update</a></td>
-                                <td><a href="/Admin/Article/Delete/@item.ID" type="button" class="btn btn-block btn-danger">Delete</a></td>
-                            </tr>
+                                <tr>
+                                    <td>@item.Header</td>
+                                    <td>@item.Content</td>
+                                    <td>@item.PublishDate</td>
+                                    <td>@item.SubCategory.Category.Name</td>
+                                    <td>@item.SubCategory.Name</td>
+                                    <td>@item.AppUser.UserName</td>
+                                    <td>
+                                        <img src="@item.ImagePath" style="display:block" width="75" height="75" />
+                                    </td>
+                                    <td><a href="/Admin/Article/Update/@item.ID" type="button" class="btn btn-block btn-warning">Update</a></td>
+                                    <td><a href="/Admin/Article/Delete/@item.ID" type="button" class="btn btn-block btn-danger">Delete</a></td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -82,5 +82,4 @@
         })
     })
 </script>
-
 

@@ -11,7 +11,7 @@ namespace TechnologyNews.Model.Option
     {
         public string Header { get; set; }
         public string Content { get; set; }
-        //public string ImagePath { get; set; }
+        public string ImagePath { get; set; }
         public DateTime? PublishDate { get; set; }
 
         public Guid SubCategoryID { get; set; }

@@ -30,6 +30,7 @@ namespace TechnologyNews.UI.Controllers
                         string cookie = user.UserName;
                         FormsAuthentication.SetAuthCookie(cookie, true);
                         Session["FullName"] = user.FirstName + ' ' + user.LastName;
+                        Session["ImagePath"] = user.UserImage;
                         return Redirect("/Admin/Home/Index");
                     }
                     else if (user.Role == Role.Author)
@@ -37,6 +38,7 @@ namespace TechnologyNews.UI.Controllers
                         string cookie = user.UserName;
                         FormsAuthentication.SetAuthCookie(cookie, true);
                         Session["FullName"] = user.FirstName + ' ' + user.LastName;
+                        Session["ImagePath"] = user.UserImage;
                         return Redirect("/Author/Home/Index");
                     }
                     else
@@ -44,6 +46,7 @@ namespace TechnologyNews.UI.Controllers
                         string cookie = user.UserName;
                         FormsAuthentication.SetAuthCookie(cookie, true);
                         Session["FullName"] = user.FirstName + ' ' + user.LastName;
+                        Session["ImagePath"] = user.UserImage;
                         return Redirect("/Member/Home/Index");
                     }
                 }
@@ -75,6 +78,7 @@ namespace TechnologyNews.UI.Controllers
                             string cookie = user.UserName;
                             FormsAuthentication.SetAuthCookie(cookie, true);
                             Session["FullName"] = user.FirstName + ' ' + user.LastName;
+                            Session["ImagePath"] = user.UserImage;
                             return Redirect("/Admin/Home/Index");
                         }
                         else if (user.Role == Role.Author)
@@ -82,6 +86,7 @@ namespace TechnologyNews.UI.Controllers
                             string cookie = user.UserName;
                             FormsAuthentication.SetAuthCookie(cookie, true);
                             Session["FullName"] = user.FirstName + ' ' + user.LastName;
+                            Session["ImagePath"] = user.UserImage;
                             return Redirect("/Author/Home/Index");
                         }
                         else
@@ -89,6 +94,7 @@ namespace TechnologyNews.UI.Controllers
                             string cookie = user.UserName;
                             FormsAuthentication.SetAuthCookie(cookie, true);
                             Session["FullName"] = user.FirstName + ' ' + user.LastName;
+                            Session["ImagePath"] = user.UserImage;
                             return Redirect("/Member/Home/Index");
                         }
                     }

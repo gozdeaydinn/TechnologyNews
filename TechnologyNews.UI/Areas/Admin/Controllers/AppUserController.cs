@@ -61,7 +61,6 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             model.Email = appuser.Email;
             model.Role = appuser.Role;
             model.Gender = appuser.Gender;
-            model.Address = appuser.Address;
             model.PhoneNumber = appuser.PhoneNumber;
             model.UserImage = appuser.UserImage;
             model.XSmallUserImage = appuser.XSmallUserImage;
@@ -79,33 +78,33 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             data.UserImage = UploadedImagePaths[0];
 
 
-            AppUser update = _appUserService.GetById(data.ID);
+            AppUser appuser = _appUserService.GetById(data.ID);
 
             if (data.UserImage == "0" || data.UserImage == "1" || data.UserImage == "2")
             {
 
-                if (update.UserImage == null || update.UserImage == ImageUploader.DefaultProfileImagePath)
+                if (appuser.UserImage == null || appuser.UserImage == ImageUploader.DefaultProfileImagePath)
                 {
-                    update.UserImage = ImageUploader.DefaultProfileImagePath;
-                    update.XSmallUserImage = ImageUploader.DefaultXSmallProfileImage;
-                    update.CruptedUserImage = ImageUploader.DefaulCruptedProfileImage;
+                    appuser.UserImage = ImageUploader.DefaultProfileImagePath;
+                    appuser.XSmallUserImage = ImageUploader.DefaultXSmallProfileImage;
+                    appuser.CruptedUserImage = ImageUploader.DefaulCruptedProfileImage;
                 }
                 else
                 {
-                    update.UserImage = update.UserImage;
-                    update.XSmallUserImage = update.XSmallUserImage;
-                    update.CruptedUserImage = update.CruptedUserImage;
+                    appuser.UserImage = appuser.UserImage;
+                    appuser.XSmallUserImage = appuser.XSmallUserImage;
+                    appuser.CruptedUserImage = appuser.CruptedUserImage;
                 }
 
             }
             else
             {
-                update.UserImage = UploadedImagePaths[0];
-                update.XSmallUserImage = UploadedImagePaths[1];
-                update.CruptedUserImage = UploadedImagePaths[2];
+                appuser.UserImage = UploadedImagePaths[0];
+                appuser.XSmallUserImage = UploadedImagePaths[1];
+                appuser.CruptedUserImage = UploadedImagePaths[2];
             }
 
-            AppUser appuser = _appUserService.GetById(data.ID);
+           
             appuser.FirstName = data.FirstName;
             appuser.LastName = data.LastName;
             appuser.UserName = data.UserName;

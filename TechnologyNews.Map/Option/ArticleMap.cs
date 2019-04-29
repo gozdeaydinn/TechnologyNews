@@ -16,7 +16,7 @@ namespace TechnologyNews.Map.Option
             Property(x => x.Content).IsOptional();
             Property(x => x.Header).IsOptional();
             Property(x => x.PublishDate).IsOptional();
-            //Property(x => x.ImagePath).IsOptional();
+            Property(x => x.ImagePath).IsOptional();
 
             HasRequired(x => x.SubCategory)
                 .WithMany(x => x.Articles)

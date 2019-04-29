@@ -54,19 +54,19 @@
                         </div>
                         <div class="form-group">
                             <label for="Role">Role</label>
-                            <select name="Role" class="form-control">
+                            <select name="Role" value="@Model.Role" class="form-control">
                                 @foreach (var item in Enum.GetNames(typeof(TechnologyNews.Model.Option.Role)))
                                 {
-                                    <option value="@Model.Role">@item</option>
+                                    <option value="@item">@item</option>
                                 }
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="Gender">Gender</label>
-                            <select name="Gender" class="form-control">
+                            <select name="Gender" value="@Model.Gender" class="form-control">
                                 @foreach (var item in Enum.GetNames(typeof(TechnologyNews.Model.Option.Gender)))
                                 {
-                                    <option value="@Model.Gender">@item</option>
+                                    <option value="@item">@item</option>
                                 }
                             </select>
                         </div>

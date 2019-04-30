@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TechnologyNews.Model.Option;
 using TechnologyNews.Service.Option;
+using TechnologyNews.UI.Areas.Author.Models.DTO;
 using TechnologyNews.UI.Areas.Author.Models.VM;
 using TechnologyNews.Utility;
 
@@ -67,5 +68,71 @@ namespace TechnologyNews.UI.Areas.Author.Controllers
             List<Article> model = _articleService.GetDefault(x => x.AppUserID == userID && (x.Status == Core.Enum.Status.Active || x.Status == Core.Enum.Status.Updated));
             return View(model);
         }
+        public ActionResult Update(Guid id)
+        {
+            Article article = _articleService.GetById(id);
+            UpdateArticleVM model = new UpdateArticleVM();
+            model.Article.ID = article.ID;
+            model.Article.Header = article.Header;
+            model.Article.Content = article.Content;
+            model.Article.PublishDate = DateTime.Now;
+            model.Article.ImagePath = article.ImagePath;
+            List<Category> categorymodel = _categoryService.GetActive();
+            model.Categories = categorymodel;
+            List<SubCategory> subcategorymodel = _subCategoryService.GetActive();
+            model.SubCategories = subcategorymodel;
+
+            return View(model);
+                
+        }
+        [HttpPost]
+        public ActionResult Update(ArticleDTO data,HttpPostedFileBase Image)
+        {
+            List<string> UploadedImagePaths = new List<string>();
+
+            UploadedImagePaths = ImageUploader.UploadSingleImage(ImageUploader.OriginalProfileImagePath, Image, 1);
+
+            data.ImagePath = UploadedImagePaths[0];
+
+            Article update = _articleService.GetById(data.ID);
+
+            if (data.ImagePath == "0" || data.ImagePath == "1" || data.ImagePath == "2")
+            {
+
+                if (update.ImagePath == null || update.ImagePath == ImageUploader.DefaultProfileImagePath)
+                {
+                    update.ImagePath = ImageUploader.DefaultProfileImagePath;
+                    update.ImagePath = ImageUploader.DefaultXSmallProfileImage;
+                    update.ImagePath = ImageUploader.DefaulCruptedProfileImage;
+                }
+                else
+                {
+                    update.ImagePath = update.ImagePath;
+                }
+
+            }
+            else
+            {
+                update.ImagePath = UploadedImagePaths[0];
+                update.ImagePath = UploadedImagePaths[1];
+                update.ImagePath = UploadedImagePaths[2];
+            }
+
+            Article article = _articleService.GetById(data.ID);
+            article.Header = data.Header;
+            article.Content = data.Content;
+            article.PublishDate = data.PublishDate;
+            article.SubCategory.CategoryID = data.CategoryID;
+            article.SubCategoryID = data.SubCategoryID;
+            article.Status = Core.Enum.Status.Updated;
+            _articleService.Update(article);
+            return Redirect("/Author/Article/List");
+        }
+        public ActionResult Delete(Guid id)
+        {
+            _articleService.Remove(id);
+            return Redirect("/Author/Article/List");
+        }
     }
+   
 }

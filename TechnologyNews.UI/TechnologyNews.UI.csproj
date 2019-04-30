@@ -139,7 +139,13 @@
     <Compile Include="Areas\Author\AuthorAreaRegistration.cs" />
     <Compile Include="Areas\Author\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Author\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Author\Models\DTO\ArticleDTO.cs" />
     <Compile Include="Areas\Author\Models\VM\AddArticleVM.cs" />
+    <Compile Include="Areas\Author\Models\VM\UpdateArticleVM.cs" />
+    <Compile Include="Areas\Member\Controllers\CommentController.cs" />
+    <Compile Include="Areas\Member\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
+    <Compile Include="Areas\Member\Models\VM\ArticleDetailVM.cs" />
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
@@ -183,6 +189,10 @@
     <Content Include="Areas\Author\Views\Article\Add.cshtml" />
     <Content Include="Areas\Author\Views\Article\List.cshtml" />
     <Content Include="Areas\Author\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Author\Views\Article\Update.cshtml" />
+    <Content Include="Areas\Member\Views\web.config" />
+    <Content Include="Areas\Member\Views\Shared\MemberLayoutPage.cshtml" />
+    <Content Include="Areas\Member\Views\Home\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
@@ -195,6 +205,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Areas\Member\Models\DTO\" />
+    <Folder Include="Areas\Member\Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechnologyNews.Core\TechnologyNews.Core.csproj">

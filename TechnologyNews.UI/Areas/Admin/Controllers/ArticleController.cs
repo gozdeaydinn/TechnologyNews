@@ -30,7 +30,7 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             AddArticleVM model = new AddArticleVM()
             {
                 Categories = _categoryService.GetActive(),
-                AppUsers = _appUserService.GetActive(),
+                AppUsers = _appUserService.GetDefault(x=>x.Role!=Role.Member),
                 SubCategories = _subCategoryService.GetActive()
             };
 
@@ -82,7 +82,7 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             model.Categories = categorymodel;
             List<SubCategory> subcategorymodel = _subCategoryService.GetActive();
             model.SubCategories = subcategorymodel;
-            List<AppUser> appusermodel = _appUserService.GetActive();
+            List<AppUser> appusermodel = _appUserService.GetDefault(x=>x.Role!=Role.Member);
             model.AppUsers = appusermodel;
             return View(model);
         }

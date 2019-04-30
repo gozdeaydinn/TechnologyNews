@@ -58,6 +58,7 @@ namespace TechnologyNews.UI.Areas.Admin.Controllers
             model.LastName = appuser.LastName;
             model.UserName = appuser.UserName;
             model.Password = appuser.Password;
+            model.Address = appuser.Address;
             model.Email = appuser.Email;
             model.Role = appuser.Role;
             model.Gender = appuser.Gender;

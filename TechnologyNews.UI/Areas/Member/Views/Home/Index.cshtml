@@ -25,16 +25,15 @@
                         @if (item.Content.Length >= 300)
                         {
                             @item.Content.Substring(0, 300);
-                            <span><a href="/Member/Comment/Show/@item.ID">Read More...</a></span>
+                            <span><a href="/Member/Article/Show/@item.ID">Read...</a></span>
                         }
                         else
                         {
                             @item.Content;
-                            <span><a href="/Member/Comment/Show/@item.ID">Read More...</a></span>
+                            <span><a href="/Member/Article/Show/@item.ID">Read...</a></span>
                         }
 
                     </div>
-                    }
                     <!-- Box Comment -->
                     <!-- /.box -->
                 </div>

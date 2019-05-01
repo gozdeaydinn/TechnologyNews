@@ -142,6 +142,7 @@
     <Compile Include="Areas\Author\Models\DTO\ArticleDTO.cs" />
     <Compile Include="Areas\Author\Models\VM\AddArticleVM.cs" />
     <Compile Include="Areas\Author\Models\VM\UpdateArticleVM.cs" />
+    <Compile Include="Areas\Member\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Member\Controllers\CommentController.cs" />
     <Compile Include="Areas\Member\Controllers\HomeController.cs" />
     <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
@@ -193,7 +194,7 @@
     <Content Include="Areas\Member\Views\web.config" />
     <Content Include="Areas\Member\Views\Shared\MemberLayoutPage.cshtml" />
     <Content Include="Areas\Member\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Member\Views\Comment\Show.cshtml" />
+    <Content Include="Areas\Member\Views\Article\Show.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
@@ -207,6 +208,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Member\Models\DTO\" />
+    <Folder Include="Areas\Member\Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechnologyNews.Core\TechnologyNews.Core.csproj">

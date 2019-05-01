@@ -13,36 +13,22 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
     {
         CommentService _commentService;
         AppUserService _appUserService;
-        ArticleService _articleService;
-        LikeService _likeService;
+
         public CommentController()
         {
             _commentService = new CommentService();
             _appUserService = new AppUserService();
-            _articleService = new ArticleService();
-            _likeService = new LikeService();
-        }
-        public ActionResult Show(Guid id)
-        {
-            ArticleDetailVM model = new ArticleDetailVM();
-            model.Article = _articleService.GetById(id);
-            model.AppUser = _appUserService.GetById(model.Article.AppUser.ID);
-            model.Comments = _commentService.GetDefault(x => x.ArticleID == id);
-            model.LikeCount = _likeService.GetDefault(x => x.ArticleID == id).Count;
-            model.CommentCount = _commentService.GetDefault(x => x.ArticleID == id).Count;
-            model.Likes = _likeService.GetDefault(x => x.ArticleID == id);
 
-            return View(model);
         }
-        public JsonResult AddComment(string usercomment, Guid id)
+
+        public JsonResult AddComment(string userComment, Guid id)
         {
+
             Comment comment = new Comment();
 
-            comment.AppUserID = _appUserService.FindByUserName(User.Identity.Name).ID;
+            comment.AppUserID = _appUserService.FindByUserName(HttpContext.User.Identity.Name).ID;
             comment.ArticleID = id;
-            comment.Content = usercomment;
-            comment.CreatedDate = DateTime.Now;
-            _commentService.Add(comment);
+            comment.Content = userComment;
 
             bool isAdded = false;
             try
@@ -56,8 +42,8 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
             }
 
             return Json(isAdded, JsonRequestBehavior.AllowGet);
-
         }
+
         public JsonResult GetAtricleComment(string id)
         {
 
@@ -68,7 +54,7 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
 
             return Json(new
             {
-                AppUserImagePath = comment.AppUser.UserImage,
+                AppUserImagePath = comment.AppUser.XSmallUserImage,
                 FirstName = comment.AppUser.FirstName,
                 LastName = comment.AppUser.LastName,
                 CreatedDate = comment.CreatedDate.ToString(),

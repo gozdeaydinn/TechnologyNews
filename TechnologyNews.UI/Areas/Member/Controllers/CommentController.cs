@@ -13,12 +13,15 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
     {
         CommentService _commentService;
         AppUserService _appUserService;
+        LikeService _likeService;
+        ArticleService _articleService;
 
         public CommentController()
         {
             _commentService = new CommentService();
             _appUserService = new AppUserService();
-
+            _likeService = new LikeService();
+            _articleService= new ArticleService();
         }
 
         public JsonResult AddComment(string userComment, Guid id)
@@ -46,21 +49,39 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
 
         public JsonResult GetAtricleComment(string id)
         {
-
             Guid articleID = new Guid(id);
 
             Comment comment = _commentService.GetDefault(x => x.ArticleID == articleID && x.Status == Core.Enum.Status.Active).LastOrDefault();
 
-
             return Json(new
             {
-                AppUserImagePath = comment.AppUser.XSmallUserImage,
+                AppUserImagePath = comment.AppUser.UserImage,
                 FirstName = comment.AppUser.FirstName,
                 LastName = comment.AppUser.LastName,
                 CreatedDate = comment.CreatedDate.ToString(),
-                Content = comment.Content
+                Content = comment.Content,
+                CommentCount = _commentService.GetDefault(x => x.ArticleID == articleID && (x.Status == Core.Enum.Status.Active || x.Status == Core.Enum.Status.Updated)).Count(),
+                LikeCount = _likeService.GetDefault(x => x.ArticleID == articleID && (x.Status == Core.Enum.Status.Active || x.Status == Core.Enum.Status.Updated)).Count(),
             }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult DeleteComment(Guid id)
+        {
+            Guid userID = _appUserService.FindByUserName(HttpContext.User.Identity.Name).ID;
+            bool isDelete = false;
+
+
+            if (_commentService.Any(x => x.AppUserID == userID ))
+            {
+                isDelete = true;
+                _commentService.Remove(id);
+                return Json(isDelete, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                isDelete = false;
+                return Json(isDelete, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

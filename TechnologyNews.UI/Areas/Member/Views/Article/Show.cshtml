@@ -9,32 +9,34 @@
 
 <section class="content">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <!-- Box Comment -->
             <div class="box box-widget">
                 <div class="box-header with-border">
                     <div class="user-block">
                         <img class="img-circle" src="@Model.AppUser.UserImage" alt="User Image">
                         <span class="username"><a href="#">@Model.AppUser.FirstName @Model.AppUser.LastName</a></span>
-                        <span class="description">@Model.Article.Header</span>
+                        <span class="description">@Model.Article.Header @Model.Article.CreatedDate</span>
                     </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body" id="articlelist">
                     <img class="img-responsive pad" src="@Model.Article.ImagePath" alt="Photo">
                     <p>@Model.Article.Content</p>
-                    @if (@Model.Likes.Count == 0)
+
+                    @if (!(Model.Article.Likes.Any(x => x.AppUser.UserName == User.Identity.Name)))
                     {
                         string elementID = "message" + Model.Article.ID;
                         <button type="button" id="like" onclick="like('@Model.Article.ID')" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
                         <span id="@elementID" style="display:none">Like you</span>
+
                     }
                     else
                     {
-                        <label>Like you.</label>
+                        <label>Beğendin</label>
+                        <button type="button" id="like" onclick="like('@Model.Article.ID')" class="btn btn-default btn-xs" disabled="disabled"><i class="fa fa-thumbs-o-up"></i> Like</button>
                     }
-
-                    <span class="pull-right text-muted">@Model.LikeCount likes - @Model.CommentCount comments</span>
+                        <span class="pull-right text-muted" id="commentcount">@Model.LikeCount likes  @Model.CommentCount comments</span>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer box-comments" id="dynamiccomment">
@@ -42,11 +44,24 @@
                     {
                         <div class="box-comment">
                             <!-- User image -->
-                            <img class="img-circle img-sm" src="@item.AppUser.XSmallUserImage" alt="User Image">
+                            <img class="img-circle img-sm" src="@item.AppUser.UserImage" alt="User Image">
                             <div class="comment-text">
                                 <span class="username">
                                     @item.AppUser.FirstName @item.AppUser.LastName
-                                    <span class="text-muted pull-right">@item.CreatedDate</span>
+                                    <span class="text-muted pull-right" id="a_@item.ID">
+                                        @item.CreatedDate
+                                        <br />
+                                        @if (Model.Comments.Any(x => x.AppUser.UserName == User.Identity.Name))
+                                        {
+                                            <a href="/Member/Comment/DeleteComment/@item.ID" id="commentdelete" type="button" onclick="commentdelete('@item.ID')" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></a>
+                                            <button type="button" id="edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" id="commentdelete" disabled="disabled" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></button>
+                                            <button type="button" id="edit" disabled="disabled" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
+                                        }
+                                    </span>
                                 </span><!-- /.username -->
                                 @item.Content
                             </div>
@@ -72,15 +87,50 @@
     </div>
 </section>
 
-
+<script src="~/Content/Scripts/jquery.min.js"></script>
 
 <script>
+
+    function commentdelete(id) {
+        $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("DeleteComment","Comment")/" + id,
+            success: function (result) {
+                $("#a_" + id).fadeOut();
+                    }
+                })
+        }
+    
+        function like(id) {
+        $.ajax({
+                    type: "POST",
+                    dataType: "Json",
+                    url: "@Url.Action("AddLike","Like")/" + id,
+                    success: function (data) {
+                if (data.isSuccess == true) {
+                            $("#message" + id).removeAttr("");
+                            $("#like").remove();
+                            $("#message" + id).html("");
+                            $("#message" + id).append(data.userMessage);
+                    $("#commentcount").hide().fadeOut(2000);
+                    $("#articlelist").append("<span class='pull-right text-muted' id='commentcount'>" + data.Likes + " likes  " + data.Comments + " comments</span>");
+                        }
+                        else {
+                            $("#message" + id).removeAttr("");
+                            $("#like").remove();
+                            $("#message" + id).html("");
+                            $("#message" + id).append(data.userMessage);
+                        }
+                    }
+                })
+        }
+
 
         function comment(articleID) {
             console.log(articleID);
             var commentText = $("#comment").val();
 
-        $.ajax({
+            $.ajax({
                     type: "POST",
                     dataType: "Json",
                     data: { userComment: commentText, id: articleID },
@@ -103,7 +153,6 @@
                         }
                     }
                 })
-
     }
 
         function commentdynamiclist(id) {
@@ -116,10 +165,11 @@
                     if (data != null) {
 
                         //console.log(data.FirstName);
-                        $("#dynamiccomment").append("<div class='box-comment' id='lastcomment'><!-- User image --><img class='img-circle img-sm' src='" + data.AppUserImagePath + "' alt='User Image'><div class='comment-text'><span class='username'>" + data.FirstName + " " + data.LastName + "<span class='text-muted pull-right'>" + data.CreatedDate + "</span></span><!-- /.username -->" + data.Content + "</div></div>");
-
+                        $("#dynamiccomment").append("<div class='box-comment' id='lastcomment'><!-- User image --><img class='img-circle img-sm' src='" + data.AppUserImagePath + "' alt='User Image'><div class='comment-text'><span class='username'>" + data.FirstName + " " + data.LastName + "<span class='text-muted pull-right'>" + data.CreatedDate + "<br /><a href='' id='commentdelete' type='button' class='btn btn-default btn-xs'><i class='fa fa-trash-o'></i></a><button type='button' id='edit' class='btn btn-default btn-xs'><i class='fa fa-edit'></i></button></span></span><!-- /.username -->" + data.Content + "</div></div>");
+                        $("#commentcount").hide().fadeOut(2000);
+                        $("#articlelist").append("<span class='pull-right text-muted' id='commentcount'>"+data.LikeCount+" likes  "+data.CommentCount+" comments</span>");
                         $("#comment").val("");
-                        $("#message").fadeOut(2000);
+                        $("#message").fadeOut(2000);  
                         $("#lastcomment").hide().fadeIn(2000);
 
                     }
@@ -128,8 +178,9 @@
                     }
                 }
             })
-
-        }
+    }
 
 </script>
 
+
+ 

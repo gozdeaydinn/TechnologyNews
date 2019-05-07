@@ -4,12 +4,14 @@
     Layout = "~/Areas/Member/Views/Shared/MemberLayoutPage.cshtml";
 }
 
-@model IEnumerable<TechnologyNews.Model.Option.Article>
+@model TechnologyNews.UI.Areas.Member.Models.VM.ArticleDetailVM
+
+<br />
 
 <section class="content">
     <div class="row">
         <div class="col-md-10">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Articles)
             {
                 <div class="box box-widget">
                     <div class="box-header with-border">
@@ -19,7 +21,7 @@
                             <span class="description">@item.Header - @item.PublishDate</span>
                         </div>
                     </div>
-                    <!-- /.box-header -->
+
                     <div class="box-body">
 
                         @if (item.Content.Length >= 300)

@@ -145,8 +145,10 @@
     <Compile Include="Areas\Member\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Member\Controllers\CommentController.cs" />
     <Compile Include="Areas\Member\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Member\Controllers\LikeController.cs" />
     <Compile Include="Areas\Member\MemberAreaRegistration.cs" />
     <Compile Include="Areas\Member\Models\VM\ArticleDetailVM.cs" />
+    <Compile Include="Areas\Member\Models\VM\JsonLikeVM.cs" />
     <Compile Include="Authorize\UserAuthorize.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,6 +211,7 @@
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Areas\Member\Models\DTO\" />
     <Folder Include="Areas\Member\Views\Comment\" />
+    <Folder Include="Areas\Member\Views\Like\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TechnologyNews.Core\TechnologyNews.Core.csproj">

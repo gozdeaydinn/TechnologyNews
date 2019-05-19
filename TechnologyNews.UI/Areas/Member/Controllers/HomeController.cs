@@ -34,8 +34,7 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
             }
 
             return View(model);
-            //var model =_articleService.GetActive().OrderByDescending(x => x.CreatedDate).Take(5);
-            //return View(model);
+
         }
     }
 }

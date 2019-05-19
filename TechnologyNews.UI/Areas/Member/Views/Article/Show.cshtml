@@ -31,35 +31,31 @@
                         <span id="@elementID" style="display:none">Like you</span>
 
                     }
-                    else
+                    @*else
                     {
                         <label>Beğendin</label>
                         <button type="button" id="like" onclick="like('@Model.Article.ID')" class="btn btn-default btn-xs" disabled="disabled"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                    }
+                    }*@
                         <span class="pull-right text-muted" id="commentcount">@Model.LikeCount likes  @Model.CommentCount comments</span>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer box-comments" id="dynamiccomment">
                     @foreach (var item in Model.Comments)
                     {
-                        <div class="box-comment">
+                        <div class="box-comment" id="a_@item.ID">
                             <!-- User image -->
                             <img class="img-circle img-sm" src="@item.AppUser.UserImage" alt="User Image">
                             <div class="comment-text">
                                 <span class="username">
                                     @item.AppUser.FirstName @item.AppUser.LastName
-                                    <span class="text-muted pull-right" id="a_@item.ID">
+                                    <span class="text-muted pull-right">
                                         @item.CreatedDate
                                         <br />
-                                        @if (Model.Comments.Any(x => x.AppUser.UserName == User.Identity.Name))
+                                        @if (item.AppUser.UserName==User.Identity.Name)
                                         {
-                                            <a href="/Member/Comment/DeleteComment/@item.ID" id="commentdelete" type="button" onclick="commentdelete('@item.ID')" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></a>
+
+                                            <a href="#" id="commentdelete" type="button" onclick="commentdelete('@item.ID')" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></a>
                                             <button type="button" id="edit" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
-                                        }
-                                        else
-                                        {
-                                            <button type="button" id="commentdelete" disabled="disabled" class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></button>
-                                            <button type="button" id="edit" disabled="disabled" class="btn btn-default btn-xs"><i class="fa fa-edit"></i></button>
                                         }
                                     </span>
                                 </span><!-- /.username -->
@@ -95,8 +91,11 @@
         $.ajax({
                     type: "POST",
                     url: "@Url.Action("DeleteComment","Comment")/" + id,
-            success: function (result) {
+            success: function (data) {
+              
                 $("#a_" + id).fadeOut();
+               
+
                     }
                 })
         }
@@ -160,7 +159,7 @@
             $.ajax({
                 type: "POST",
                 dataType: "Json",
-                url: "@Url.Action("GetAtricleComment", "Comment")/" + id,
+                url: "@Url.Action("GetArticleComment", "Comment")/" + id,
                 success: function (data) {
                     if (data != null) {
 

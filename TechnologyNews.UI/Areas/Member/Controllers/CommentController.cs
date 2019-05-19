@@ -47,9 +47,10 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
             return Json(isAdded, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetAtricleComment(string id)
+        public JsonResult GetArticleComment(string id)
         {
             Guid articleID = new Guid(id);
+          
 
             Comment comment = _commentService.GetDefault(x => x.ArticleID == articleID && x.Status == Core.Enum.Status.Active).LastOrDefault();
 
@@ -68,10 +69,11 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
         public JsonResult DeleteComment(Guid id)
         {
             Guid userID = _appUserService.FindByUserName(HttpContext.User.Identity.Name).ID;
+            Comment comment = _commentService.GetById(id);
             bool isDelete = false;
 
 
-            if (_commentService.Any(x => x.AppUserID == userID ))
+            if (comment.AppUserID==userID)
             {
                 isDelete = true;
                 _commentService.Remove(id);
@@ -83,5 +85,7 @@ namespace TechnologyNews.UI.Areas.Member.Controllers
                 return Json(isDelete, JsonRequestBehavior.AllowGet);
             }
         }
+
+        
     }
 }
